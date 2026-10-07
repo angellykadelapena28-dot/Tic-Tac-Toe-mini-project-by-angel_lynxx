@@ -13,24 +13,24 @@ import java.util.Random;
 
 public class tictactoe2 extends JFrame {
 
-    // --- COLOR PALETTE ---
-    private static final Color BG_DARK_PINK   = new Color(248, 200, 220); // Main Background
-    private static final Color CELL_PINK      = new Color(255, 230, 240); // Grid Tile Default
-    private static final Color CELL_HOVER     = new Color(255, 215, 230); // Grid Tile Hover
-    private static final Color HEADER_PINK    = new Color(216, 112, 147); // Dark Pink Text/Border
-    private static final Color ACCENT_ROSE    = new Color(199, 21, 133);  // Deep Rose Pink
     
-    // Fixed Colors for X (Red) and O (Green)
-    private static final Color TEXT_X_COLOR   = new Color(220, 50, 50);   // Crimson Red
-    private static final Color TEXT_O_COLOR   = new Color(34, 139, 34);   // Forest Green
+    private static final Color BG_DARK_PINK   = new Color(248, 200, 220); 
+    private static final Color CELL_PINK      = new Color(255, 230, 240); 
+    private static final Color CELL_HOVER     = new Color(255, 215, 230); 
+    private static final Color HEADER_PINK    = new Color(216, 112, 147); 
+    private static final Color ACCENT_ROSE    = new Color(199, 21, 133);  
+    
+  
+    private static final Color TEXT_X_COLOR   = new Color(220, 50, 50);  
+    private static final Color TEXT_O_COLOR   = new Color(34, 139, 34);  
 
-    // Game Logic Variables
+    
     private char[][] board = new char[3][3];
     private boolean isPlayerXTurn = true;
     private boolean gameOver = false;
 
-    private int gameMode = 1; // 1: Player vs Player, 2: Player vs Bot
-    private int difficulty = 1; // 1: Easy, 2: Medium, 3: Hard
+    private int gameMode = 1;
+    private int difficulty = 1;
 
     private String player1Name = "Player 1";
     private String player2Name = "Player 2";
@@ -38,7 +38,7 @@ public class tictactoe2 extends JFrame {
     private int p2Wins = 0;
     private int draws = 0;
 
-    // Swing Components
+    
     private final JButton[][] gridButtons = new JButton[3][3];
     private JLabel statusLabel;
     private JLabel scoreLabel;
@@ -68,7 +68,7 @@ public class tictactoe2 extends JFrame {
         mainPanel.setBackground(BG_DARK_PINK);
         mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // --- TOP PANEL: Settings & Status ---
+        
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.setOpaque(false);
@@ -80,7 +80,7 @@ public class tictactoe2 extends JFrame {
         topPanel.add(titleLabel);
         topPanel.add(Box.createVerticalStrut(10));
 
-        // Mode Selection
+        
         JPanel modePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         modePanel.setOpaque(false);
 
@@ -98,7 +98,7 @@ public class tictactoe2 extends JFrame {
         modePanel.add(pvpRadio);
         modePanel.add(botRadio);
 
-        // Difficulty Selection
+        
         String[] diffs = {"Easy", "Medium", "Hard"};
         diffDropdown = new JComboBox<>(diffs);
         diffDropdown.setEnabled(false);
@@ -109,7 +109,7 @@ public class tictactoe2 extends JFrame {
         topPanel.add(modePanel);
         topPanel.add(Box.createVerticalStrut(8));
 
-        // Player Name Fields
+        
         JPanel namesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         namesPanel.setOpaque(false);
 
@@ -131,7 +131,7 @@ public class tictactoe2 extends JFrame {
         topPanel.add(namesPanel);
         topPanel.add(Box.createVerticalStrut(10));
 
-        // Scoreboard & Status Displays
+      
         scoreLabel = new JLabel("", SwingConstants.CENTER);
         scoreLabel.setFont(new Font("SansSerif", Font.BOLD, 13));
         scoreLabel.setForeground(HEADER_PINK);
@@ -148,7 +148,7 @@ public class tictactoe2 extends JFrame {
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        // --- CENTER PANEL: 3x3 Grid ---
+      
         confettiPanel = new ConfettiPanel();
         confettiPanel.setOpaque(false);
         confettiPanel.setPreferredSize(new Dimension(380, 380));
@@ -162,7 +162,7 @@ public class tictactoe2 extends JFrame {
         }
         mainPanel.add(confettiPanel, BorderLayout.CENTER);
 
-        // --- BOTTOM PANEL: Reset Action ---
+       
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.setOpaque(false);
         bottomPanel.setPreferredSize(new Dimension(0, 60));
@@ -179,7 +179,7 @@ public class tictactoe2 extends JFrame {
 
         add(mainPanel);
 
-        // Action Listeners
+      
         pvpRadio.addActionListener(e -> toggleBotOptions());
         botRadio.addActionListener(e -> toggleBotOptions());
         applyConfigBtn.addActionListener(e -> applyConfiguration());
@@ -327,7 +327,7 @@ public class tictactoe2 extends JFrame {
     private void makeMove(int r, int c, char symbol) {
         board[r][c] = symbol;
         gridButtons[r][c].setText(String.valueOf(symbol));
-        // Ensures X stays red and O stays green
+      
         gridButtons[r][c].setForeground(symbol == 'X' ? TEXT_X_COLOR : TEXT_O_COLOR);
     }
 
@@ -358,7 +358,7 @@ public class tictactoe2 extends JFrame {
     }
 
     private void disableAllCells() {
-        UIManager.put("Button.disabledText", null); // Retain original foreground colors when buttons disable
+        UIManager.put("Button.disabledText", null);
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 gridButtons[r][c].setEnabled(false);
@@ -371,7 +371,7 @@ public class tictactoe2 extends JFrame {
         }
     }
 
-    // --- BOT AI DIFFICULTIES ---
+
 
     private void executeBotMove() {
         switch (difficulty) {
@@ -477,7 +477,7 @@ public class tictactoe2 extends JFrame {
         }
     }
 
-    // --- BOARD STATE CHECKS ---
+   
 
     private List<int[]> getEmptyCells() {
         List<int[]> list = new ArrayList<>();
